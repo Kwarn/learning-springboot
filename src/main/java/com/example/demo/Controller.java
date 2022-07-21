@@ -1,10 +1,7 @@
 package com.example.demo;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.json.JsonMapper;
 import java.util.List;
+import java.util.Optional;
 import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,10 +11,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @SpringBootApplication
@@ -44,28 +41,16 @@ public class Controller implements CommandLineRunner {
     return "Howdy! Check out the Logs to see the output...";
   }
 
-  @GetMapping("/hello")
-  public String hello(
-    @RequestParam(value = "name", defaultValue = "World") String name
-  ) {
-    return String.format("Hello %s!", name);
-  }
-
-  @GetMapping("/students")
+  @GetMapping("/api/students")
   public List<Student> allStudents() {
     return repository.findAll();
   }
 
-  @GetMapping("/findStudent")
-  public Object findStudentByEmail(@Valid @RequestBody String email)
-    throws Exception {
-    ObjectMapper mapper = new JsonMapper();
-    JsonNode json = mapper.readTree(email);
-    String e = json.get("email").asText();
-
-    List<Student> students = repository.findByEmail(e);
-    if (students.size() >= 1) {
-      return students.get(0);
+  @GetMapping("/api/students/id/{id}")
+  public Object findStudentById(@PathVariable("id") String id) {
+    Optional<Student> student = repository.findById(id);
+    if (student != null) {
+      return student;
     }
     return new Response(
       "Could not find a student with that email address.",
@@ -73,14 +58,11 @@ public class Controller implements CommandLineRunner {
     );
   }
 
-  @PostMapping("/createStudent")
+  @PostMapping("/api/students")
   public Student createStudent(@Valid @RequestBody Student newStudent) {
     Student result = repository.save(newStudent);
     return result;
   }
-
-  // @PostMapping('/enrollStudent')
-  // public Course enrollStudent(@Valid @RequestBody newStudent)
 
   @Override
   public void run(String... args) throws Exception {
@@ -90,15 +72,6 @@ public class Controller implements CommandLineRunner {
 
     for (Student student : repository.findAll()) {
       logger.info("Found student: {}.", student);
-    }
-
-    logger.info(
-      "Student found with findByName('Karl'): {}",
-      repository.findByName("Karl")
-    );
-
-    for (Student student : repository.findByEmail("b@b.com")) {
-      logger.info("Student found with findByEmail('b@b.com'): {}", student);
     }
   }
 }
