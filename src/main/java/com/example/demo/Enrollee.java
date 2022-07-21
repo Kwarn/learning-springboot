@@ -4,7 +4,7 @@ import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 
-public class Enroll {
+public class Enrollee {
 
   @Getter
   @Setter
@@ -16,8 +16,12 @@ public class Enroll {
   @NotBlank(message = "Missing 'courseName' field")
   private String studentId;
 
-  public Enroll(String courseName, String studentId) {
+  public Enrollee(String courseName, String studentId) {
     this.courseName = courseName;
     this.studentId = studentId;
+  }
+
+  public String getCourseName() {
+    return this.courseName;
   }
 }
