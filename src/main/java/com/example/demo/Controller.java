@@ -1,5 +1,9 @@
 package com.example.demo;
 
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import java.util.List;
 import javax.validation.Valid;
 import org.slf4j.Logger;
@@ -8,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,8 +52,25 @@ public class Controller implements CommandLineRunner {
   }
 
   @GetMapping("/students")
-  public List<Student> getStudents() {
+  public List<Student> allStudents() {
     return repository.findAll();
+  }
+
+  @GetMapping("/findStudent")
+  public Object findStudentByEmail(@Valid @RequestBody String email)
+    throws Exception {
+    ObjectMapper mapper = new JsonMapper();
+    JsonNode json = mapper.readTree(email);
+    String e = json.get("email").asText();
+
+    List<Student> students = repository.findByEmail(e);
+    if (students.size() >= 1) {
+      return students.get(0);
+    }
+    return new Response(
+      "Could not find a student with that email address.",
+      HttpStatus.NOT_FOUND
+    );
   }
 
   @PostMapping("/createStudent")
@@ -56,6 +78,9 @@ public class Controller implements CommandLineRunner {
     Student result = repository.save(newStudent);
     return result;
   }
+
+  // @PostMapping('/enrollStudent')
+  // public Course enrollStudent(@Valid @RequestBody newStudent)
 
   @Override
   public void run(String... args) throws Exception {

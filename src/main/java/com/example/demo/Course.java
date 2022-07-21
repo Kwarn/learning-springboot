@@ -7,9 +7,9 @@ import lombok.Setter;
 
 public class Course {
 
-  @NotBlank(message = "Missing 'course' field")
   @Getter
   @Setter
+  @NotBlank(message = "Missing 'name' field")
   private String name;
 
   @Getter
