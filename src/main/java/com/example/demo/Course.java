@@ -1,15 +1,17 @@
 package com.example.demo;
 
-import java.util.List;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import java.util.List;
+import lombok.ToString;
 import lombok.AccessLevel;
-import org.springframework.data.annotation.Id;
+import lombok.RequiredArgsConstructor;
 import javax.validation.constraints.NotBlank;
+import org.springframework.data.annotation.Id;
 
 @Getter
 @Setter
+@ToString
 @RequiredArgsConstructor
 public class Course {
 
@@ -20,5 +22,6 @@ public class Course {
   @NotBlank(message = "Missing 'name' field")
   private final String courseName;
 
-  private final List<Student> students;
+  // list of studentId'ss
+  private List<String> students;
 }

@@ -16,4 +16,7 @@ public class Response {
 
   @NotBlank(message = "Missing 'status' field")
   private final HttpStatus status;
+
+  @NotBlank(message = "Missing 'statusCode' field")
+  private final Integer statusCode;
 }
