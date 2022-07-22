@@ -1,12 +1,12 @@
 package com.example.demo.student;
 
-import com.example.demo.Response;
 import java.util.List;
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
+import com.example.demo.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.boot.CommandLineRunner;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class StudentService implements IStudentService, CommandLineRunner {
@@ -39,11 +39,12 @@ public class StudentService implements IStudentService, CommandLineRunner {
 
   public void run(String... args) throws Exception {
     studentRepository.deleteAll();
-    Student student1 = new Student("Karl", "k@k.com", 34);
 
+    Student student1 = new Student("Karl", "k@k.com", 34);
     Student student2 = new Student("Bert", "b@b.com", 22);
     studentRepository.save(student1);
     studentRepository.save(student2);
+
     for (Student student : studentRepository.findAll()) {
       // logger.info("Found student: {}.", student);
       System.out.println(student);

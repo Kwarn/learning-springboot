@@ -1,16 +1,16 @@
 package com.example.demo.enrolment;
 
+import java.util.List;
+import java.util.Arrays;
+import java.util.Optional;
 import com.example.demo.Response;
 import com.example.demo.course.Course;
-import com.example.demo.course.CourseRepository;
 import com.example.demo.student.Student;
-import com.example.demo.student.StudentRepository;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import com.example.demo.course.CourseRepository;
+import com.example.demo.student.StudentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class EnrolmentService implements IEnrolmentService {

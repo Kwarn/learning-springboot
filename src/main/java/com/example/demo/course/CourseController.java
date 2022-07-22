@@ -7,14 +7,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
-@SpringBootApplication
 public class CourseController {
 
-  private ICourseService courseService;
+  @Autowired
+  CourseService courseService;
 
   @GetMapping("/api/courses")
   public List<Course> allCourses() {
