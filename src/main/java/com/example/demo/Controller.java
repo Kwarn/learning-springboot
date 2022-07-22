@@ -53,13 +53,12 @@ public class Controller implements CommandLineRunner {
       throw new Exception("no string was passed to addStringToListSafe()");
     }
     if (list == null) {
-      List<String> updatedList = Arrays.asList(string);
-      return updatedList;
-    } else {
-      // does this mutate the original list?
-      list.add(string);
-      return list;
+      List<String> newList = Arrays.asList(string);
+      return newList;
     }
+    // does this mutate the original list?
+    list.add(string);
+    return list;
   }
 
   /*  Logging  */
@@ -148,7 +147,7 @@ public class Controller implements CommandLineRunner {
     String studentId = enrollee.getStudentId();
     Optional<Student> student = studentRepository.findById(studentId);
 
-    if (student == null) {
+    if (student.isPresent() == false) {
       return new Response(
         "Could not find a student with that ID.",
         HttpStatus.NOT_FOUND,
@@ -163,7 +162,7 @@ public class Controller implements CommandLineRunner {
       boolean isAlreadyEnrolled = course
         .getStudents()
         .stream()
-        .anyMatch(id -> id == studentId);
+        .anyMatch(id -> id.equals(studentId));
 
       if (isAlreadyEnrolled) {
         return new Response(
@@ -194,7 +193,6 @@ public class Controller implements CommandLineRunner {
 
     Course course1 = new Course("Learn Java");
     Course course2 = new Course("Learn SpringBoot");
-
     courseRepository.save(course1);
     courseRepository.save(course2);
 
