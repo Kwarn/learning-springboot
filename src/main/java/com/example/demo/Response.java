@@ -1,24 +1,19 @@
 package com.example.demo;
 
-import javax.validation.constraints.NotBlank;
 import lombok.Getter;
+import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.http.HttpStatus;
+import javax.validation.constraints.NotBlank;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class Response {
 
-  @Getter
-  @Setter
   @NotBlank(message = "Missing 'message' field")
-  private String message;
+  private final String message;
 
-  @Getter
-  @Setter
   @NotBlank(message = "Missing 'status' field")
-  private HttpStatus status;
-
-  public Response(String message, HttpStatus status) {
-    this.message = message;
-    this.status = status;
-  }
+  private final HttpStatus status;
 }

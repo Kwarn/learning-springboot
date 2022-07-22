@@ -1,27 +1,18 @@
 package com.example.demo;
 
-import javax.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.RequiredArgsConstructor;
+import javax.validation.constraints.NotBlank;
 
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class Enrollee {
 
-  @Getter
-  @Setter
   @NotBlank(message = "Missing 'courseName' field")
-  private String courseName;
+  private final String courseName;
 
-  @Getter
-  @Setter
   @NotBlank(message = "Missing 'courseName' field")
-  private String studentId;
-
-  public Enrollee(String courseName, String studentId) {
-    this.courseName = courseName;
-    this.studentId = studentId;
-  }
-
-  public String getCourseName() {
-    return this.courseName;
-  }
+  private final String studentId;
 }

@@ -1,28 +1,24 @@
 package com.example.demo;
 
 import java.util.List;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.AccessLevel;
+import org.springframework.data.annotation.Id;
 import javax.validation.constraints.NotBlank;
 
-import org.springframework.data.annotation.Id;
-
-import lombok.Getter;
-import lombok.Setter;
-
+@Getter
+@Setter
+@RequiredArgsConstructor
 public class Course {
+
   @Id
+  @Setter(AccessLevel.PROTECTED)
   private String id;
 
-  @Getter
-  @Setter
   @NotBlank(message = "Missing 'name' field")
-  private String courseName;
+  private final String courseName;
 
-  @Getter
-  @Setter
-  private List<Student> students;
-
-  public Course(String courseName, List<Student> students) {
-    this.courseName = courseName;
-    this.students = students;
-  }
+  private final List<Student> students;
 }
