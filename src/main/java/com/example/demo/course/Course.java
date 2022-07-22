@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.course;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,6 +22,6 @@ public class Course {
   @NotBlank(message = "Missing 'name' field")
   private final String courseName;
 
-  // list of studentId'ss
+  // list of studentId's
   private List<String> students;
 }

@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.enrolment;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +10,7 @@ import javax.validation.constraints.NotBlank;
 @Setter
 @ToString
 @RequiredArgsConstructor
-public class Enrollee {
+public class Enrolment {
 
   @NotBlank(message = "Missing 'courseName' field")
   private final String courseName;

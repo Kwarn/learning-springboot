@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.student;
 
 import lombok.Getter;
 import lombok.Setter;
