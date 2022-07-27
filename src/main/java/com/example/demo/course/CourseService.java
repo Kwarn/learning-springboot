@@ -3,6 +3,8 @@ package com.example.demo.course;
 import com.example.demo.Response;
 import java.util.List;
 import java.util.Optional;
+
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.http.HttpStatus;
@@ -35,6 +37,10 @@ public class CourseService implements ICourseService, CommandLineRunner {
   @Override
   public Course createCourse(Course course) {
     return courseRepository.save(course);
+  }
+
+  public Object deleteById(ObjectId id) {
+    return courseRepository.deleteById(id);
   }
 
   public void run(String... args) throws Exception {
