@@ -39,7 +39,7 @@ public class EnrolmentService implements IEnrolmentService {
 
   @Override
   public Object enroll(Enrolment enroll) throws Exception{
-    List<Course> courses = courseRepository.findByCourseName(
+    List<Course> courses = courseRepository.findByName(
       enroll.getCourseName()
     );
 

@@ -15,6 +15,6 @@ public class Enrolment {
   @NotBlank(message = "Missing 'courseName' field")
   private final String courseName;
 
-  @NotBlank(message = "Missing 'courseName' field")
+  @NotBlank(message = "Missing 'studentId' field")
   private final String studentId;
 }

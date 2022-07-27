@@ -20,7 +20,7 @@ public class Course {
   private String id;
 
   @NotBlank(message = "Missing 'name' field")
-  private final String courseName;
+  private final String name;
 
   @NotBlank(message = "Missing 'description' field")
   private final String description;
