@@ -2,7 +2,6 @@ package com.example.demo.course;
 
 import java.util.List;
 import javax.validation.Valid;
-
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -35,7 +34,7 @@ public class CourseController {
     return courseService.createCourse(course);
   }
 
-  @DeleteMapping("/api/course/{id}")
+  @DeleteMapping("/api/course/delete/{id}")
   public Object deleteCourse(@PathVariable("id") ObjectId id) {
     return courseService.deleteById(id);
   }

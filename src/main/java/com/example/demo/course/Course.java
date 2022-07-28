@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
-import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 
 @Getter
@@ -19,7 +18,7 @@ public class Course {
 
   @Id
   @Setter(AccessLevel.PROTECTED)
-  private ObjectId id;
+  private String id;
 
   @NotBlank(message = "Missing 'name' field")
   private final String name;

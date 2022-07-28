@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
     use Response convention not own implimentation
     "return new ResponseEntity<>("Student created successfully", HttpStatus.CREATED);""
 */
+
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 @RestController
 @SpringBootApplication
