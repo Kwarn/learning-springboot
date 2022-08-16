@@ -6,6 +6,7 @@ import com.example.demo.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.boot.CommandLineRunner;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
@@ -35,6 +36,10 @@ public class StudentService implements IStudentService, CommandLineRunner {
   @Override
   public Student createStudent(Student student) {
     return studentRepository.save(student);
+  }
+
+  public Object deleteById(ObjectId id) {
+    return studentRepository.deleteById(id);
   }
 
   public void run(String... args) throws Exception {
