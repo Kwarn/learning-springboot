@@ -12,8 +12,8 @@ import javax.validation.constraints.NotBlank;
 @RequiredArgsConstructor
 public class Enrolment {
 
-  @NotBlank(message = "Missing 'courseName' field")
-  private final String courseName;
+  @NotBlank(message = "Missing 'courseId' field")
+  private final String courseId;
 
   @NotBlank(message = "Missing 'studentId' field")
   private final String studentId;

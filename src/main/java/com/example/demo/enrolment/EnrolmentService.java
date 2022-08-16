@@ -1,16 +1,16 @@
 package com.example.demo.enrolment;
 
-import java.util.List;
-import java.util.Arrays;
-import java.util.Optional;
 import com.example.demo.Response;
 import com.example.demo.course.Course;
+import com.example.demo.course.CourseRepository;
 import com.example.demo.student.Student;
+import com.example.demo.student.StudentRepository;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-import com.example.demo.course.CourseRepository;
-import com.example.demo.student.StudentRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 
 @Service
 public class EnrolmentService implements IEnrolmentService {
@@ -38,18 +38,19 @@ public class EnrolmentService implements IEnrolmentService {
   }
 
   @Override
-  public Object enroll(Enrolment enroll) throws Exception{
-    List<Course> courses = courseRepository.findByName(
-      enroll.getCourseName()
-    );
+  public Object enroll(Enrolment enroll) throws Exception {
+    String courseId = enroll.getCourseId();
+    Optional<Course> courseResult = courseRepository.findById(courseId);
+    Course course;
 
-    if (courses.size() < 1) {
+    if (courseResult.isPresent() == false) {
       return new Response(
-        "Could not find a course with that name.",
+        "Could not find a course with that id.",
         HttpStatus.NOT_FOUND,
         404
       );
     }
+    course = courseResult.get(); // uggo
 
     String studentId = enroll.getStudentId();
     Optional<Student> student = studentRepository.findById(studentId);
@@ -62,8 +63,7 @@ public class EnrolmentService implements IEnrolmentService {
       );
     }
 
-    Course course = courses.get(0);
-    List<String> studentIds = course.getStudents();
+    List<String> studentIds = course.getStudents(); // no error
 
     if (studentIds != null) {
       boolean isAlreadyEnrolled = course
