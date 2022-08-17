@@ -20,4 +20,9 @@ public class EnrolmentController {
     throws Exception {
     return enrolmentService.enroll(enrolment);
   }
+  @PostMapping("/api/unenroll")
+  public Object unenrollStudent(@Valid @RequestBody Enrolment enrolment)
+    throws Exception {
+    return enrolmentService.unenroll(enrolment);
+  }
 }
